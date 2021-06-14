@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.TOrderinfoMapper">
+  <resultMap id="BaseResultMap" type="com.qf.entity.TOrderinfo">
+    <id column="toi_id" jdbcType="BIGINT" property="toiId" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="pro_id" jdbcType="BIGINT" property="proId" />
+    <result column="pcount" jdbcType="BIGINT" property="pcount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    toi_id, order_id, pro_id,pcount
+  </sql>
+
+
+
+  <select id="selectByOrderId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_orderinfo
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_orderinfo
+    where toi_id = #{toiId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_orderinfo
+    where toi_id = #{toiId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.qf.entity.TOrderinfo">
+    insert into t_orderinfo (toi_id, order_id, pro_id
+      )
+    values (#{toiId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{proId,jdbcType=BIGINT}
+      )
+  </insert>
+
+  <insert id="insertOrderInfos">
+    insert into t_orderinfo (toi_id, order_id, pro_id
+      )
+    values
+     <foreach collection="list" item="orderinfo" separator=",">
+     (#{orderinfo.toiId,jdbcType=BIGINT}, #{orderinfo.orderId,jdbcType=BIGINT}, #{orderinfo.proId,jdbcType=BIGINT}
+      )
+     </foreach>
+  </insert>
+
+
+
+
+  <insert id="insertSelective" parameterType="com.qf.entity.TOrderinfo">
+    insert into t_orderinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="toiId != null">
+        toi_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="proId != null">
+        pro_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="toiId != null">
+        #{toiId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="proId != null">
+        #{proId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.entity.TOrderinfo">
+    update t_orderinfo
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="proId != null">
+        pro_id = #{proId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where toi_id = #{toiId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.entity.TOrderinfo">
+    update t_orderinfo
+    set order_id = #{orderId,jdbcType=BIGINT},
+      pro_id = #{proId,jdbcType=BIGINT}
+    where toi_id = #{toiId,jdbcType=BIGINT}
+  </update>
+</mapper>

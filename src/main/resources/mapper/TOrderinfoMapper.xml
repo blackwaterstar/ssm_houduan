@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qf.mapper.TOrderinfoMapper">
-  <resultMap id="BaseResultMap" type="com.qf.entity.TOrderinfo">
+<mapper namespace="com.halcyon.mapper.TOrderinfoMapper">
+  <resultMap id="BaseResultMap" type="com.halcyon.entity.TOrderinfo">
     <id column="toi_id" jdbcType="BIGINT" property="toiId" />
     <result column="order_id" jdbcType="BIGINT" property="orderId" />
     <result column="pro_id" jdbcType="BIGINT" property="proId" />
@@ -30,7 +30,7 @@
     delete from t_orderinfo
     where toi_id = #{toiId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.qf.entity.TOrderinfo">
+  <insert id="insert" parameterType="com.halcyon.entity.TOrderinfo">
     insert into t_orderinfo (toi_id, order_id, pro_id
       )
     values (#{toiId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{proId,jdbcType=BIGINT}
@@ -50,7 +50,7 @@
 
 
 
-  <insert id="insertSelective" parameterType="com.qf.entity.TOrderinfo">
+  <insert id="insertSelective" parameterType="com.halcyon.entity.TOrderinfo">
     insert into t_orderinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="toiId != null">
@@ -75,7 +75,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qf.entity.TOrderinfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.halcyon.entity.TOrderinfo">
     update t_orderinfo
     <set>
       <if test="orderId != null">
@@ -87,7 +87,7 @@
     </set>
     where toi_id = #{toiId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.qf.entity.TOrderinfo">
+  <update id="updateByPrimaryKey" parameterType="com.halcyon.entity.TOrderinfo">
     update t_orderinfo
     set order_id = #{orderId,jdbcType=BIGINT},
       pro_id = #{proId,jdbcType=BIGINT}

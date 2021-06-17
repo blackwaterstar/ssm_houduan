@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qf.mapper.TUserAddrMapper">
-  <resultMap id="BaseResultMap" type="com.qf.entity.TUserAddr">
+<mapper namespace="com.halcyon.mapper.TUserAddrMapper">
+  <resultMap id="BaseResultMap" type="com.halcyon.entity.TUserAddr">
     <id column="tua_id" jdbcType="BIGINT" property="tuaId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="user_addr" jdbcType="VARCHAR" property="userAddr" />
@@ -19,13 +19,13 @@
     delete from t_user_addr
     where tua_id = #{tuaId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.qf.entity.TUserAddr">
+  <insert id="insert" parameterType="com.halcyon.entity.TUserAddr">
     insert into t_user_addr (tua_id, user_id, user_addr
       )
     values (#{tuaId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userAddr,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.qf.entity.TUserAddr">
+  <insert id="insertSelective" parameterType="com.halcyon.entity.TUserAddr">
     insert into t_user_addr
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="tuaId != null">
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qf.entity.TUserAddr">
+  <update id="updateByPrimaryKeySelective" parameterType="com.halcyon.entity.TUserAddr">
     update t_user_addr
     <set>
       <if test="userId != null">
@@ -62,7 +62,7 @@
     </set>
     where tua_id = #{tuaId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.qf.entity.TUserAddr">
+  <update id="updateByPrimaryKey" parameterType="com.halcyon.entity.TUserAddr">
     update t_user_addr
     set user_id = #{userId,jdbcType=BIGINT},
       user_addr = #{userAddr,jdbcType=VARCHAR}

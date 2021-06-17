@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qf.mapper.TBisWalletMapper">
-  <resultMap id="BaseResultMap" type="com.qf.entity.TBisWallet">
+<mapper namespace="com.halcyon.mapper.TBisWalletMapper">
+  <resultMap id="BaseResultMap" type="com.halcyon.entity.TBisWallet">
     <id column="tbw_id" jdbcType="BIGINT" property="tbwId" />
     <result column="bis_id" jdbcType="BIGINT" property="bisId" />
     <result column="bis_amount" jdbcType="DECIMAL" property="bisAmount" />
@@ -20,13 +20,13 @@
     delete from t_bis_wallet
     where tbw_id = #{tbwId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.qf.entity.TBisWallet">
+  <insert id="insert" parameterType="com.halcyon.entity.TBisWallet">
     insert into t_bis_wallet (tbw_id, bis_id, bis_amount, 
       bis_fzamount)
     values (#{tbwId,jdbcType=BIGINT}, #{bisId,jdbcType=BIGINT}, #{bisAmount,jdbcType=DECIMAL}, 
       #{bisFzamount,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.qf.entity.TBisWallet">
+  <insert id="insertSelective" parameterType="com.halcyon.entity.TBisWallet">
     insert into t_bis_wallet
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="tbwId != null">
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qf.entity.TBisWallet">
+  <update id="updateByPrimaryKeySelective" parameterType="com.halcyon.entity.TBisWallet">
     update t_bis_wallet
     <set>
       <if test="bisId != null">
@@ -72,7 +72,7 @@
     </set>
     where tbw_id = #{tbwId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.qf.entity.TBisWallet">
+  <update id="updateByPrimaryKey" parameterType="com.halcyon.entity.TBisWallet">
     update t_bis_wallet
     set bis_id = #{bisId,jdbcType=BIGINT},
       bis_amount = #{bisAmount,jdbcType=DECIMAL},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qf.mapper.TCartMapper">
-  <resultMap id="BaseResultMap" type="com.qf.entity.TCart">
+<mapper namespace="com.halcyon.mapper.TCartMapper">
+  <resultMap id="BaseResultMap" type="com.halcyon.entity.TCart">
     <id column="tc_id" jdbcType="BIGINT" property="tcId" />
     <result column="cart_id" jdbcType="BIGINT" property="cartId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
@@ -12,7 +12,7 @@
 
 
 
-  <resultMap id="CartVOResultMap" type="com.qf.entity.vo.CartVO">
+  <resultMap id="CartVOResultMap" type="com.halcyon.entity.vo.CartVO">
     <id column="t1.cart_id" jdbcType="BIGINT" property="cartId" />
     <result column="t1.user_id" jdbcType="BIGINT" property="userId" />
     <result column="t1.pid" jdbcType="BIGINT" property="pid" />
@@ -62,13 +62,13 @@
     delete from t_cart
     where tc_id = #{tcId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.qf.entity.TCart">
+  <insert id="insert" parameterType="com.halcyon.entity.TCart">
     insert into t_cart (tc_id, cart_id, user_id,
       pid, pcount)
     values (#{tcId,jdbcType=BIGINT}, #{cartId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
       #{pid,jdbcType=BIGINT}, #{pcount,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.qf.entity.TCart">
+  <insert id="insertSelective" parameterType="com.halcyon.entity.TCart">
     insert into t_cart
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="tcId != null">
@@ -105,7 +105,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qf.entity.TCart">
+  <update id="updateByPrimaryKeySelective" parameterType="com.halcyon.entity.TCart">
     update t_cart
     <set>
       <if test="cartId != null">
@@ -123,7 +123,7 @@
     </set>
     where tc_id = #{tcId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.qf.entity.TCart">
+  <update id="updateByPrimaryKey" parameterType="com.halcyon.entity.TCart">
     update t_cart
     set cart_id = #{cartId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},

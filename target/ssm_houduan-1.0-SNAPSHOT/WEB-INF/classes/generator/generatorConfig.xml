@@ -22,7 +22,7 @@
             <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
         <!--指定生成entity实体类的具体位置-->
-        <javaModelGenerator targetPackage="com.qf.entity" targetProject="./src/main/java">
+        <javaModelGenerator targetPackage="com.halcyon.entity" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -31,7 +31,7 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!--指定生成mapper接口的具体位置-->
-        <javaClientGenerator targetPackage="com.qf.mapper" targetProject="./src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.halcyon.mapper" targetProject="./src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 

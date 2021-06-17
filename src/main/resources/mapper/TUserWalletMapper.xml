@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qf.mapper.TUserWalletMapper">
-  <resultMap id="BaseResultMap" type="com.qf.entity.TUserWallet">
+<mapper namespace="com.halcyon.mapper.TUserWalletMapper">
+  <resultMap id="BaseResultMap" type="com.halcyon.entity.TUserWallet">
     <id column="tuw_id" jdbcType="BIGINT" property="tuwId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="user_amount" jdbcType="DECIMAL" property="userAmount" />
@@ -30,13 +30,13 @@
     delete from t_user_wallet
     where tuw_id = #{tuwId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.qf.entity.TUserWallet">
+  <insert id="insert" parameterType="com.halcyon.entity.TUserWallet">
     insert into t_user_wallet (tuw_id, user_id, user_amount,
       user_fzamount)
     values (#{tuwId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userAmount,jdbcType=DECIMAL},
       #{userFzamount,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.qf.entity.TUserWallet">
+  <insert id="insertSelective" parameterType="com.halcyon.entity.TUserWallet">
     insert into t_user_wallet
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="tuwId != null">
@@ -67,7 +67,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qf.entity.TUserWallet">
+  <update id="updateByPrimaryKeySelective" parameterType="com.halcyon.entity.TUserWallet">
     update t_user_wallet
     <set>
       <if test="userId != null">
@@ -82,7 +82,7 @@
     </set>
     where tuw_id = #{tuwId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.qf.entity.TUserWallet">
+  <update id="updateByPrimaryKey" parameterType="com.halcyon.entity.TUserWallet">
     update t_user_wallet
     set user_id = #{userId,jdbcType=BIGINT},
       user_amount = #{userAmount,jdbcType=DECIMAL},

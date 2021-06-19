@@ -46,6 +46,7 @@ public class OrderServiceImpl implements IOrderService {
      *
      * @param orderVO
      */
+    //方法抛出异常，就会回滚，数据库里面的数据也会回滚。
     @Transactional(rollbackFor = Exception.class)  //方法A
     public void addOrder(OrderVO orderVO) {
         //从orderVO中获得order对象
@@ -115,21 +116,11 @@ public class OrderServiceImpl implements IOrderService {
             List<Long> pids = orderDTO.getPids();
             //根据商品id集合获得相应的商品集合
             List<TProduct> products = productService.selectByPids(pids);
-
             orderVO.setProducts(products);
-
             //=======开心！！！！=======
-
-
             addOrder(orderVO);
-
-
-
-
             resultDTO.setResult(true);
             resultDTO.setMessage("下单成功");
-
-
         } catch (Exception e) {
             e.printStackTrace();
             resultDTO.setResult(false);

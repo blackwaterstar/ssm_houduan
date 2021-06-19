@@ -23,18 +23,18 @@ public class OrderController {
     @ResponseBody
     @RequestMapping("addOrder")
     public ResultDTO addOrder(OrderDTO orderDTO){
-//        System.out.println(orderDTO);
+        System.out.println(orderDTO);
 
         return  orderService.addOrder(orderDTO);
 
     }
-
 
     /**
      * 获取当前用户的所有订单
      * @param userId
      * @return
      */
+    @ResponseBody
     @RequestMapping("list")
     public List<CreateOrderDTO> getList(Long userId){
 

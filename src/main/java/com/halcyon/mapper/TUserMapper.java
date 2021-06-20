@@ -21,7 +21,7 @@ public interface TUserMapper {
 
     TUser selectByTelAndPwd(Map<String, String> map);
 
-    String register(TUser user);
+    Integer register(TUser user);
     /**
      * 分页查询 User
      * @param startRows 起始页

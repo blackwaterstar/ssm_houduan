@@ -46,9 +46,9 @@ public class UserManage {
         @ResponseBody
         @RequestMapping(value = "/createUser",method = RequestMethod.POST)
         public Integer createUser(TUser user) {
-            Random random = new Random();
-            Integer number = random.nextInt(9000) + 1000;
-            user.setUserId(System.currentTimeMillis() + String.valueOf(number));
+//            Random random = new Random();
+//            Integer number = random.nextInt(9000) + 1000;
+//            user.setUserId(System.currentTimeMillis() + String.valueOf(number));
             return userManageService.createUser(user);
         }
 

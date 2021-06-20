@@ -19,11 +19,11 @@ public class UserServiceImpl implements IUserService {
     private TUserMapper userMapper;
 
     @Override
-    public ResultDTO<TUser> login(String userTel, String userPwd) {
+    public ResultDTO<TUser> login(String userId, String userPwd) {
 
         //因为需要传递两个参数到映射文件，因此把参数存入到MAP中
         Map<String,String> map = new HashMap<String,String>();
-        map.put("userTel",userTel);
+        map.put("userId", userId);
         map.put("userPwd",userPwd);
 
         TUser user = userMapper.selectByTelAndPwd(map);
@@ -33,7 +33,7 @@ public class UserServiceImpl implements IUserService {
 //            resultDTO.setResult(false);
 //            resultDTO.setMessage("电话号码或密码错误");
 //            resultDTO = ResultUtil.failResult("手机号码或密码错误");
-            resultDTO = ResultUtil.failResult(user,"手机号码或密码错误");
+            resultDTO = ResultUtil.failResult(user,"账号或密码错误");
         }else{
 
 //            resultDTO.setResult(true);
@@ -45,7 +45,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public String register(TUser user) {
+    public Integer register(TUser user) {
         return userMapper.register(user);
     }
 }

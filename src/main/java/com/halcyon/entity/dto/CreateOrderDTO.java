@@ -1,9 +1,13 @@
 package com.halcyon.entity.dto;
 
+
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+@Data
 public class CreateOrderDTO {
 
     /*
@@ -23,35 +27,5 @@ public class CreateOrderDTO {
 
     private List<OrderProductDTO> products;
 
-    public Date getCreatedTime() {
-        return createdTime;
-    }
 
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public BigDecimal getOrderPrice() {
-        return orderPrice;
-    }
-
-    public void setOrderPrice(BigDecimal orderPrice) {
-        this.orderPrice = orderPrice;
-    }
-
-    public List<OrderProductDTO> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<OrderProductDTO> products) {
-        this.products = products;
-    }
 }

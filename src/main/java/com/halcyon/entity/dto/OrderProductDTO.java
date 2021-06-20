@@ -1,7 +1,10 @@
 package com.halcyon.entity.dto;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 
+@Data
 public class OrderProductDTO {
 
      /*
@@ -19,27 +22,4 @@ public class OrderProductDTO {
      private BigDecimal price;
      private Long pcount;
 
-    public String getPname() {
-        return pname;
-    }
-
-    public void setPname(String pname) {
-        this.pname = pname;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Long getPcount() {
-        return pcount;
-    }
-
-    public void setPcount(Long pcount) {
-        this.pcount = pcount;
-    }
 }

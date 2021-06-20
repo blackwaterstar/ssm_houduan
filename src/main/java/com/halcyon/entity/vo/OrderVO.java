@@ -2,12 +2,14 @@ package com.halcyon.entity.vo;
 
 import com.halcyon.entity.TOrder;
 import com.halcyon.entity.TProduct;
+import lombok.Data;
 
 import java.util.List;
 
 /**
  * 跟订单相关的数据实体
  */
+@Data
 public class OrderVO {
 
     private TOrder tOrder;
@@ -15,19 +17,5 @@ public class OrderVO {
     //当前订单所有商品的集合
     private List<TProduct> products;
 
-    public TOrder gettOrder() {
-        return tOrder;
-    }
 
-    public void settOrder(TOrder tOrder) {
-        this.tOrder = tOrder;
-    }
-
-    public List<TProduct> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<TProduct> products) {
-        this.products = products;
-    }
 }

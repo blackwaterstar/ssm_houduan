@@ -4,7 +4,7 @@ import com.halcyon.entity.TUser;
 import com.halcyon.entity.dto.ResultDTO;
 
 public interface IUserService {
-    ResultDTO<TUser> login(String userTel, String userPwd);
+    ResultDTO<TUser> login(String userId, String userPwd);
 
-    String register(TUser user);
+    Integer register(TUser user);
 }

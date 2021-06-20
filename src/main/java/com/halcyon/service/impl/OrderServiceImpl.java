@@ -50,7 +50,8 @@ public class OrderServiceImpl implements IOrderService {
     @Transactional(rollbackFor = Exception.class)  //方法A
     public void addOrder(OrderVO orderVO) {
         //从orderVO中获得order对象
-        TOrder order = orderVO.gettOrder();
+       // TOrder order = orderVO.gettOrder();
+        TOrder order = orderVO.getTOrder();
         //从orderVO中获得所有商品的集合
         List<TProduct> products = orderVO.getProducts();
         //将order存到数据库的订单表里
@@ -110,7 +111,8 @@ public class OrderServiceImpl implements IOrderService {
             tOrder.setCreatedTime(new Date());
             tOrder.setUpdatedTime(new Date());
 
-            orderVO.settOrder(tOrder);
+            //orderVO.settOrder(tOrder);
+            orderVO.setTOrder(tOrder);
             //2.封装OrderVO中的List<Products>
 //        orderVO.setProducts();
             List<Long> pids = orderDTO.getPids();

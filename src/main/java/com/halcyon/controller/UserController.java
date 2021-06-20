@@ -19,15 +19,16 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public ResultDTO login(String userTel, String userPwd) {
-
-        return userService.login(userTel, userPwd);
+    public ResultDTO login(String userId, String userPwd) {
+        System.out.println(userId);
+        return userService.login(userId, userPwd);
 
     }
 
     @ResponseBody
     @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public String register(TUser user) {
+    public Integer register(TUser user) {
+        System.out.println(user);
         return userService.register(user);
     }
 

@@ -22,7 +22,6 @@ public class UserController {
     public ResultDTO login(String userId, String userPwd) {
         System.out.println(userId);
         return userService.login(userId, userPwd);
-
     }
 
     @ResponseBody

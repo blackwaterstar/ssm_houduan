@@ -24,7 +24,7 @@
     select
     <include refid="Base_Column_List" />
     from t_warehouse
-    order by tw_id desc
+    order by tw_id asc
     limit #{startRows,jdbcType=INTEGER},10
   </select>
 
@@ -32,15 +32,15 @@
   <select id="selectTwPage" resultType="com.halcyon.entity.TWarehouse">
     select * from t_warehouse
     <where>
+      <if test="pname != null and pname !=''">
+        and pname like concat('%', #{pname}, '%')
+      </if>
       <if test="tid != null and tid!=''">
         and tid like concat('%', #{tid}, '%')
       </if>
-      <if test="pid != null and pid!=''">
-        and pid like concat('%', #{pid}, '%')
-      </if>
 
     </where>
-    order by tw_id desc
+    order by tw_id asc
     limit #{startRows,jdbcType=INTEGER},10
   </select>
 
@@ -48,24 +48,30 @@
   <select id="getRowCount" resultType="java.lang.Integer">
     select count(*) from t_warehouse
     <where>
+      <if test="pname != null and pname !=''">
+        and pname like concat('%', #{pname}, '%')
+      </if>
       <if test="tid != null and tid!=''">
         and tid like concat('%', #{tid}, '%')
-      </if>
-      <if test="pid != null and pid!=''">
-        and pid like concat('%', #{pid}, '%')
       </if>
     </where>
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteTwById" parameterType="String">
     delete from t_warehouse
     where tw_id = #{twId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.halcyon.entity.TWarehouse">
-    insert into t_warehouse (tw_id, tid, pid, 
+
+  <!--根据 id 批量删除-->
+  <delete id="deleteTwByIdList" parameterType="java.util.List">
+    delete from t_warehouse where tw_id in <foreach collection="list" item="item"  open="(" close=")" separator=","> #{item}</foreach>
+  </delete>
+
+  <insert id="createTw" parameterType="com.halcyon.entity.TWarehouse">
+    insert into t_warehouse (tw_id, tid, pid,
       pname, pcount, pshelf
       )
-    values (#{twId,jdbcType=BIGINT}, #{tid,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, 
+    values (#{twId,jdbcType=BIGINT}, #{tid,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT},
       #{pname,jdbcType=VARCHAR}, #{pcount,jdbcType=VARCHAR}, #{pshelf,jdbcType=VARCHAR}
       )
   </insert>
@@ -112,7 +118,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.halcyon.entity.TWarehouse">
+  <update id="updateTwById" parameterType="com.halcyon.entity.TWarehouse">
     update t_warehouse
     <set>
       <if test="tid != null">

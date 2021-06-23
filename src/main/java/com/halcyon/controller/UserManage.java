@@ -62,12 +62,11 @@ public class UserManage {
         @RequestMapping(value = "/deleteUserByIdList",method = RequestMethod.POST)
         public Integer deleteUserByIdList(String tuIdList) {
             String tuIdListSub = tuIdList.substring(0, tuIdList.length()-1);
-//        String[] userIds = tuIdList.split(",");
-
             List tuIds = new ArrayList();
             for (String userIdStr: tuIdListSub.split(",")){
                 tuIds.add(userIdStr.trim());
             }
+            System.out.println(tuIds);
             return userManageService.deleteUserByIdList(tuIds);
         }
 

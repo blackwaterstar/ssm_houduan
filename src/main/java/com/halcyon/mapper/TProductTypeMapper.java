@@ -17,5 +17,5 @@ public interface TProductTypeMapper {
 
     int updateByPrimaryKey(TProductType record);
 
-    List<String> getAllTid();
+    List<TProductType> getAllTid();
 }

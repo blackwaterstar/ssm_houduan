@@ -15,12 +15,12 @@ public interface IwarehouseService {
      * 分页查询 带条件
      * @return
      */
-    List<TWarehouse> selectTwPage(@Param("tid")String tid, @Param("pid")String pid, @Param("startRows")Integer startRows);
+    List<TWarehouse> selectTwPage(String tid,String pid, Integer startRows);
 
     /**
      * 查询  个数
      */
-    Integer getRowCount(@Param("tid")String tid, @Param("pid")String pid);
+    Integer getRowCount(String pname, String tid);
 
     /**
      * 添加

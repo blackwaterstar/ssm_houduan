@@ -13,8 +13,8 @@
     tt_id, tid, tname
   </sql>
 
-  <select id="getAllTid" resultType="String">
-    select tname from t_product_type
+  <select id="getAllTid" resultType="com.halcyon.entity.TProductType">
+    select * from t_product_type
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

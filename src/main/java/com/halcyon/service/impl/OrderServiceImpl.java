@@ -80,11 +80,11 @@ public class OrderServiceImpl implements IOrderService {
 //            e.printStackTrace();
 //        }
 
-        try {
-            orderInfoService.addOrderInfo(list); //方法B  出现了异常
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            orderInfoService.addOrderInfo(list); //方法B  出现了异常
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -128,11 +128,8 @@ public class OrderServiceImpl implements IOrderService {
             resultDTO.setResult(false);
             resultDTO.setMessage("你点背，下单失败");
         }
-
-
         return resultDTO;
     }
-
     /**
      * 获取当前用户的所有订单
      *
@@ -140,7 +137,6 @@ public class OrderServiceImpl implements IOrderService {
      * @return
      */
     public List<CreateOrderDTO> getList(Long userId) {
-
         /*
     订单的创建时间
     订单编号

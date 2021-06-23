@@ -70,6 +70,7 @@ com\halcyon\controller\WXPaycontroller.class
 com\halcyon\entity\TCart.class
 com\halcyon\entity\dto\ResultDTO.class
 com\halcyon\service\impl\CartServiceImpl.class
+com\halcyon\entity\dto\CreatWarehouse.class
 com\halcyon\entity\TUserWallet.class
 com\halcyon\mapper\TSalingproductMapper.class
 com\halcyon\service\IProductService.class

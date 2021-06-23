@@ -20,17 +20,18 @@ public class WarehouseServiceImpl implements IwarehouseService {
     }
 
     @Override
-    public List<TWarehouse> selectTwPage(String tid, String pid, Integer startRows) {
-        return tWarehouseMapper.selectTwPage(tid,pid,startRows);
+    public List<TWarehouse> selectTwPage(String pname, String tid, Integer startRows) {
+        return tWarehouseMapper.selectTwPage(pname, tid,startRows);
     }
 
     @Override
-    public Integer getRowCount(String tid, String pid) {
-        return tWarehouseMapper.getRowCount(tid,pid);
+    public Integer getRowCount(String pname, String tid) {
+        return tWarehouseMapper.getRowCount(pname,tid);
     }
 
     @Override
     public Integer createTw(TWarehouse tWarehouse) {
+        tWarehouse.setPshelf("未上架");
         return tWarehouseMapper.createTw(tWarehouse);
     }
 

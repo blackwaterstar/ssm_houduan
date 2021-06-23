@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface TWarehouseMapper {
-    int deleteByPrimaryKey(Long twId);
+    Integer deleteByPrimaryKey(@Param("list") List twId);
 
-    int insert(TWarehouse record);
+    //int insert(TWarehouse record);
 
     int insertSelective(TWarehouse record);
 
@@ -29,12 +29,12 @@ public interface TWarehouseMapper {
      * 分页查询 带条件
      * @return
      */
-    List<TWarehouse> selectTwPage(@Param("tid")String tid, @Param("pid")String pid, @Param("startRows")Integer startRows);
+    List<TWarehouse> selectTwPage(@Param("pname")String pname, @Param("tid")String tid, @Param("startRows")Integer startRows);
 
     /**
      * 查询  个数
      */
-    Integer getRowCount(@Param("tid")String tid, @Param("pid")String pid);
+    Integer getRowCount(@Param("pname")String pname, @Param("tid")String tid);
 
     /**
      * 添加

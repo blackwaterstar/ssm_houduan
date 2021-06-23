@@ -15,7 +15,7 @@ public class TProductTypeServiceImpl implements TProductTypeService {
     private TProductTypeMapper tProductTypeMapper;
 
     @Override
-    public List<String> getAllTid() {
+    public List<TProductType> getAllTid() {
         return tProductTypeMapper.getAllTid();
     }
 }

@@ -13,6 +13,7 @@ public class TProduct {
     private Long price;
 
     private String pimg;
+    private Long tid;
 
 
 }

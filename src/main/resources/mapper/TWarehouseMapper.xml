@@ -20,6 +20,14 @@
   </select>
 
   <!--分页查询用户-->
+  <select id="queryTwPage1" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from t_warehouse
+    where pshelf = '未上架'
+  </select>
+
+  <!--分页查询用户-->
   <select id="queryTwPage" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
     <include refid="Base_Column_List" />

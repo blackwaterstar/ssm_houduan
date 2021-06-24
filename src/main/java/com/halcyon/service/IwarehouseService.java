@@ -42,4 +42,6 @@ public interface IwarehouseService {
      * 根据 Id 更新
      */
     Integer updateTwById(TWarehouse tWarehouse);
+
+    List<TWarehouse> queryTwPage1();
 }

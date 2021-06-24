@@ -25,6 +25,11 @@ public class WarehouseController {
         int startRows = pageSize*(pageNow-1);
         return iwarehouseService.queryTwPage(startRows);
     }
+    @ResponseBody
+    @RequestMapping(value = "/queryUserPage1",method = RequestMethod.POST)
+    public List<TWarehouse> queryUserPage1() {
+        return iwarehouseService.queryTwPage1();
+    }
 
     @ResponseBody
     @RequestMapping(value = "/selectTwPage",method = RequestMethod.POST)
@@ -56,10 +61,7 @@ public class WarehouseController {
     @ResponseBody
     @RequestMapping(value = "/deleteTwByIdList",method = RequestMethod.POST)
     public Integer deleteUserByIdList(String twIdList) {
-        System.out.println(twIdList);
         String tuIdListSub = twIdList.substring(0, twIdList.length()-1);
-//        String[] userIds = twIdList.split(",");
-
         List tuIds = new ArrayList();
         for (String userIdStr: tuIdListSub.split(",")){
             tuIds.add(userIdStr.trim());

@@ -36,6 +36,12 @@ public class WarehouseServiceImpl implements IwarehouseService {
     }
 
     @Override
+    public List<TWarehouse> queryTwPage1() {
+        return tWarehouseMapper.queryTwPage1();
+    }
+
+
+    @Override
     public Integer deleteTwById(String twId) {
         return tWarehouseMapper.deleteTwById(twId);
     }

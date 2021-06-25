@@ -26,7 +26,14 @@ public class CartServiceImpl implements ICartService {
 
     }
 
-    public List<CartVO> list(Long userId, Long pid, Long pcount) {
+    public List<CartVO> list(Long userId) {
+        //获取当前购车的CartVO集合
+        return getCartVOList(userId);
+
+    }
+
+
+    public void list1(Long userId, Long pid, Long pcount) {
         //1.获取所有的购物车信息
         List<TCart> carts = getAllCarts(userId);
 
@@ -51,10 +58,7 @@ public class CartServiceImpl implements ICartService {
             tCart.setPid(pid);
             //存到数据库里
             cartMapper.insert(tCart);
-
         }
-        //获取当前购车的CartVO集合
-        return getCartVOList(userId);
 
     }
 

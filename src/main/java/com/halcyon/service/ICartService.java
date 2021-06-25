@@ -9,8 +9,12 @@ public interface ICartService {
 
     List<TCart> getAllCarts(Long userId);
 
+    List<CartVO> getCartVOList(Long userId);
+
+
+    List<CartVO> list(Long userId);
 
 
 
-    List<CartVO> list(Long userId, Long pid, Long pcount);
+    void list1(Long userId, Long pid, Long pcount);
 }

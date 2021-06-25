@@ -16,5 +16,6 @@ public class OrderDTO {
     private String orderTel;
     private String orderAddr;
     private List<Long> pids;
+    private List<Long> pcounts;
 
 }

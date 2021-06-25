@@ -60,7 +60,7 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_cart
-    where tc_id = #{tcId,jdbcType=BIGINT}
+    where user_id = #{userId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.halcyon.entity.TCart">
     insert into t_cart (tc_id, cart_id, user_id,

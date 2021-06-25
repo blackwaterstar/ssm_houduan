@@ -6,7 +6,7 @@ import com.halcyon.entity.vo.CartVO;
 import java.util.List;
 
 public interface TCartMapper {
-    int deleteByPrimaryKey(Long tcId);
+    int deleteByPrimaryKey(Long userId);
 
     int insert(TCart record);
 

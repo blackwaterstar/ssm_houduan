@@ -38,11 +38,11 @@
   </insert>
 
   <insert id="insertOrderInfos">
-    insert into t_orderinfo (toi_id, order_id, pro_id
+    insert into t_orderinfo (toi_id, order_id, pro_id,pcount
       )
     values
      <foreach collection="list" item="orderinfo" separator=",">
-     (#{orderinfo.toiId,jdbcType=BIGINT}, #{orderinfo.orderId,jdbcType=BIGINT}, #{orderinfo.proId,jdbcType=BIGINT}
+     (#{orderinfo.toiId,jdbcType=BIGINT}, #{orderinfo.orderId,jdbcType=BIGINT}, #{orderinfo.proId,jdbcType=BIGINT} , #{orderinfo.pcount,jdbcType=BIGINT}
       )
      </foreach>
   </insert>

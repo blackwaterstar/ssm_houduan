@@ -23,14 +23,16 @@
     select
     <include refid="Base_Column_List" />
     from t_product
-    where pid in (
-      <foreach collection="list" item="pid" separator=",">
+    where pid in
+      <foreach collection="list" index="index" item="pid" open="(" separator="," close=")" >
         #{pid,jdbcType=BIGINT}
       </foreach>
-    )
+    order by field(pid,
+      <foreach collection="list" index="index" item="pid" separator=",">
+          #{pid,jdbcType=BIGINT}
+      </foreach>
+      )
   </select>
-
-
 
 
 

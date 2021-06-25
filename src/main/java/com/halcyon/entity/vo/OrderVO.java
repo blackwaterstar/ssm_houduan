@@ -17,5 +17,6 @@ public class OrderVO {
     //当前订单所有商品的集合
     private List<TProduct> products;
 
+    private List<Long> pcounts;
 
 }

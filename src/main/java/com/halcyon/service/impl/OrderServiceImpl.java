@@ -9,6 +9,7 @@ import com.halcyon.entity.dto.OrderDTO;
 import com.halcyon.entity.dto.OrderProductDTO;
 import com.halcyon.entity.dto.ResultDTO;
 import com.halcyon.entity.vo.OrderVO;
+import com.halcyon.mapper.TCartMapper;
 import com.halcyon.mapper.TOrderMapper;
 import com.halcyon.service.IOrderInfoService;
 import com.halcyon.service.IOrderService;
@@ -36,6 +37,9 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     private IOrderInfoService orderInfoService;
 
+    @Autowired
+    private TCartMapper cartMapper;
+
     /**
      *
      *  往订单表里填数据
@@ -48,8 +52,8 @@ public class OrderServiceImpl implements IOrderService {
     @Transactional(rollbackFor = Exception.class)  //方法A
     public void addOrder(OrderVO orderVO) {
         //从orderVO中获得order对象
-       // TOrder order = orderVO.gettOrder();
         TOrder order = orderVO.getTOrder();
+        List<Long> pcounts = orderVO.getPcounts();
         //从orderVO中获得所有商品的集合
         List<TProduct> products = orderVO.getProducts();
         //将order存到数据库的订单表里
@@ -61,28 +65,25 @@ public class OrderServiceImpl implements IOrderService {
         //将List<TProduct>==> List<TOrderinfo>
         //1.遍历
         Iterator<TProduct> iterator = products.iterator();
+        Iterator<Long> iterator1 = pcounts.iterator();
         List<TOrderinfo> list = new ArrayList<TOrderinfo>();
         Long orderId = order.getOrderId();
         while(iterator.hasNext()){
             TProduct product = iterator.next();
+            Long pcount = iterator1.next();
             TOrderinfo tOrderinfo = new TOrderinfo();
             tOrderinfo.setOrderId(orderId);
             tOrderinfo.setProId(product.getPid());
+            tOrderinfo.setPcount(pcount);
             list.add(tOrderinfo);
         }
-        //得到List
-        //调用service实现订单详情列表的插入
-//        try {
-//            orderInfoService.addOrderInfo(list); //方法B
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
         try {
             orderInfoService.addOrderInfo(list); //方法B  出现了异常
+            cartMapper.deleteByPrimaryKey(order.getUserId());
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 
@@ -107,16 +108,17 @@ public class OrderServiceImpl implements IOrderService {
             tOrder.setOrderPrice(orderDTO.getOrderPrice());
             tOrder.setCreatedTime(new Date());
             tOrder.setUpdatedTime(new Date());
-
+            tOrder.setPaystatue("未付款");
             //orderVO.settOrder(tOrder);
             orderVO.setTOrder(tOrder);
             //2.封装OrderVO中的List<Products>
 //        orderVO.setProducts();
             List<Long> pids = orderDTO.getPids();
+            List<Long> pcounts = orderDTO.getPcounts();
             //根据商品id集合获得相应的商品集合
             List<TProduct> products = productService.selectByPids(pids);
             orderVO.setProducts(products);
-            //=======开心！！！！=======
+            orderVO.setPcounts(pcounts);
             addOrder(orderVO);
             resultDTO.setResult(true);
             resultDTO.setMessage("下单成功");

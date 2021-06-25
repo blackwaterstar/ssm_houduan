@@ -37,14 +37,12 @@ public class OrderServiceImpl implements IOrderService {
     private IOrderInfoService orderInfoService;
 
     /**
-     * TOrder
-     * List<Product>
      *
      *  往订单表里填数据
      *  往订单详情表里填数据
      *  往已售商品表里填数据
      *
-     * @param orderVO
+     *
      */
     //方法抛出异常，就会回滚，数据库里面的数据也会回滚。
     @Transactional(rollbackFor = Exception.class)  //方法A
@@ -80,17 +78,16 @@ public class OrderServiceImpl implements IOrderService {
 //            e.printStackTrace();
 //        }
 
-//        try {
-//            orderInfoService.addOrderInfo(list); //方法B  出现了异常
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            orderInfoService.addOrderInfo(list); //方法B  出现了异常
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
     /**
      * 收到一个OrderDTO,转换成OrderVO，再调用addOrder
-     * @param orderDTO
      */
     public ResultDTO addOrder(OrderDTO orderDTO) {
 
@@ -133,8 +130,6 @@ public class OrderServiceImpl implements IOrderService {
     /**
      * 获取当前用户的所有订单
      *
-     * @param userId
-     * @return
      */
     public List<CreateOrderDTO> getList(Long userId) {
         /*
@@ -183,21 +178,14 @@ public class OrderServiceImpl implements IOrderService {
 
             //将商品集合存入到CreateOrderDTO对象中
             cod.setProducts(opds);
-
-
 //            getOrderProductDTO()
 
         });
-
-
-
         return cods;
     }
 
     /**
      * 根据商品id，去数据库获取该商品的信息，并封装成OrderProductDTO对象
-     * @param proId
-     * @return
      */
     private OrderProductDTO getOrderProductDTO(Long proId) {
         OrderProductDTO opd = new OrderProductDTO();

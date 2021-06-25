@@ -14,6 +14,7 @@ public interface TUserWalletMapper {
     int updateByPrimaryKeySelective(TUserWallet record);
 
     int updateByPrimaryKey(TUserWallet record);
+    int updateByPrimaryKey1(TUserWallet record);
 
     TUserWallet selectByUserId(Long userId);
 }

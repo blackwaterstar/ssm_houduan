@@ -89,4 +89,9 @@
       user_fzamount = #{userFzamount,jdbcType=DECIMAL}
     where tuw_id = #{tuwId,jdbcType=BIGINT}
   </update>
+  <update id="updateByPrimaryKey1" parameterType="com.halcyon.entity.TUserWallet">
+    update t_user_wallet
+    set user_amount = #{userAmount,jdbcType=DECIMAL}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
 </mapper>

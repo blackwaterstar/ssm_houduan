@@ -21,5 +21,11 @@ public class UserWalletController {
       return  userWalletService.getTUserWallet(userId);
 
     }
+    @ResponseBody
+    @RequestMapping("paymoney")
+    public void paymoney(Long userId,Long orderId,Long orderPrice){
+          userWalletService.paymoney(userId,orderId,orderPrice);
+
+    }
 
 }

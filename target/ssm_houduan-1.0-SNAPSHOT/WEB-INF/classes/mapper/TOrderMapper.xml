@@ -159,4 +159,9 @@
       updated_time = #{updatedTime,jdbcType=TIMESTAMP}
     where to_id = #{toId,jdbcType=BIGINT}
   </update>
+  <update id="updateByPrimaryKey1" parameterType="com.halcyon.entity.TOrder">
+    update t_order
+    set paystatue = #{paystatue,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
 </mapper>

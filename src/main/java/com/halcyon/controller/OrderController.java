@@ -37,10 +37,7 @@ public class OrderController {
     @ResponseBody
     @RequestMapping("list")
     public List<CreateOrderDTO> getList(Long userId){
-
         return orderService.getList(userId);
-
-
     }
 
 

@@ -1,5 +1,8 @@
 package com.halcyon.entity;
 
+import lombok.Data;
+
+@Data
 public class TUserWallet {
     private Long tuwId;
 

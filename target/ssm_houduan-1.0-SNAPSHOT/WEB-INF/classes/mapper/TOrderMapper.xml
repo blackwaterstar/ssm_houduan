@@ -23,7 +23,13 @@
     select
     <include refid="Base_Column_List" />
     from t_order
-    where user_id = #{userId,jdbcType=BIGINT}
+    where user_id = #{userId,jdbcType=BIGINT} and paystatue='未付款'
+  </select>
+  <select id="selectByUserId1" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_order
+    where user_id = #{userId,jdbcType=BIGINT} and paystatue='已付款'
   </select>
 
 

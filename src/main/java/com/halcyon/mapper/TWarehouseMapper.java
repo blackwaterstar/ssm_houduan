@@ -57,5 +57,6 @@ public interface TWarehouseMapper {
      */
     Integer updateTwById(TWarehouse tWarehouse);
 
+    Integer updateTwById1(TWarehouse tWarehouse);
     List<TWarehouse> queryTwPage1();
 }

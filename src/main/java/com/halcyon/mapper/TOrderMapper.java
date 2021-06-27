@@ -19,4 +19,5 @@ public interface TOrderMapper {
     int updateByPrimaryKey1(TOrder record);
 
     List<TOrder> selectByUserId(Long userId);
+    List<TOrder> selectByUserId1(Long userId);
 }

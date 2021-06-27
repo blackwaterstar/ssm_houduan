@@ -14,4 +14,5 @@ public interface IOrderService {
     ResultDTO addOrder(OrderDTO orderDTO);
 
     List<CreateOrderDTO> getList(Long userId);
+    List<CreateOrderDTO> getList1(Long userId);
 }

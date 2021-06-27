@@ -20,4 +20,5 @@ public interface TOrderinfoMapper {
     void insertOrderInfos(List<TOrderinfo> orderinfos);
 
     List<TOrderinfo> selectByOrderId(Long orderId);
+
 }

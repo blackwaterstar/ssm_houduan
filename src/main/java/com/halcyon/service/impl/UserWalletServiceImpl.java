@@ -1,13 +1,19 @@
 package com.halcyon.service.impl;
 
 import com.halcyon.entity.TOrder;
+import com.halcyon.entity.TOrderinfo;
 import com.halcyon.entity.TUserWallet;
+import com.halcyon.entity.TWarehouse;
 import com.halcyon.mapper.TOrderMapper;
+import com.halcyon.mapper.TOrderinfoMapper;
 import com.halcyon.mapper.TUserWalletMapper;
+import com.halcyon.mapper.TWarehouseMapper;
 import com.halcyon.service.IUserWalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class UserWalletServiceImpl implements IUserWalletService {
@@ -16,6 +22,10 @@ public class UserWalletServiceImpl implements IUserWalletService {
     private TUserWalletMapper dao;
     @Autowired
     private TOrderMapper tOrderMapper;
+    @Autowired
+    private TOrderinfoMapper tOrderinfoMapper;
+    @Autowired
+    private TWarehouseMapper tWarehouseMapper;
 
     @Override
     public TUserWallet getTUserWallet(Long userId) {
@@ -30,6 +40,14 @@ public class UserWalletServiceImpl implements IUserWalletService {
         tOrder.setOrderId(orderId);
         tOrder.setPaystatue("已付款");
         tOrderMapper.updateByPrimaryKey1(tOrder);
+        List<TOrderinfo> tOrderinfos = tOrderinfoMapper.selectByOrderId(orderId);
+        TWarehouse tWarehouse = null;
+        for(TOrderinfo tOrderinfo:tOrderinfos){
+            tWarehouse = new TWarehouse();
+            tWarehouse.setPid(tOrderinfo.getProId());
+            tWarehouse.setPcount(String.valueOf(tOrderinfo.getPcount()));
+            tWarehouseMapper.updateTwById1(tWarehouse);
+        }
         TUserWallet tUserWallet = new TUserWallet();
         tUserWallet.setUserId(userId);
         tUserWallet.setUserAmount(orderPrice);

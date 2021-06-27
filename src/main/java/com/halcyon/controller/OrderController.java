@@ -40,5 +40,16 @@ public class OrderController {
         return orderService.getList(userId);
     }
 
+    /**
+     * 获取当前用户的所有订单
+     * @param userId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("list1")
+    public List<CreateOrderDTO> getList1(Long userId){
+        return orderService.getList(userId);
+    }
+
 
 }

@@ -156,4 +156,9 @@
       pshelf = #{pshelf,jdbcType=VARCHAR}
     where tw_id = #{twId,jdbcType=BIGINT}
   </update>
+  <update id="updateTwById1" parameterType="com.halcyon.entity.TWarehouse">
+    update t_warehouse
+    set pcount =pcount - #{pcount,jdbcType=BIGINT}
+    where pid = #{pid,jdbcType=BIGINT}
+  </update>
 </mapper>

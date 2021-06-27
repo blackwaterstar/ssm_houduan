@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.halcyon.mapper.TProductTypeMapper">
+  <resultMap id="BaseResultMap" type="com.halcyon.entity.TProductType">
+    <id column="tt_id" jdbcType="INTEGER" property="ttId" />
+    <result column="tid" jdbcType="BIGINT" property="tid" />
+    <result column="tname" jdbcType="VARCHAR" property="tname" />
+  </resultMap>
+  <resultMap id="BaseResultMap1" type="com.halcyon.entity.TProductType">
+    <result column="tname" jdbcType="VARCHAR" property="tname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tt_id, tid, tname
+  </sql>
+
+  <select id="getAllTid" resultType="com.halcyon.entity.TProductType">
+    select * from t_product_type
+  </select>
+
+
+
+  <!--分页查询-->
+  <select id="queryTwPage" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from t_product_type
+    order by tt_id asc
+    limit #{startRows,jdbcType=INTEGER},10
+  </select>
+
+  <!--分页查询用户-->
+  <select id="selectTwPage" resultType="com.halcyon.entity.TProductType">
+    select * from t_product_type
+    <where>
+      <if test="tname != null and tname !=''">
+        and tname like concat('%', #{tname}, '%')
+      </if>
+      <if test="tid != null and tid!=''">
+        and tid like concat('%', #{tid}, '%')
+      </if>
+
+    </where>
+    order by tt_id asc
+    limit #{startRows,jdbcType=INTEGER},10
+  </select>
+
+  <!--查询个数-->
+  <select id="getRowCount" resultType="java.lang.Integer">
+    select count(*) from t_product_type
+    <where>
+      <if test="tname != null and tname !=''">
+        and tname like concat('%', #{tname}, '%')
+      </if>
+      <if test="tid != null and tid!=''">
+        and tid like concat('%', #{tid}, '%')
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteTwById" parameterType="String">
+    delete from t_product_type
+    where tt_id = #{ttId,jdbcType=BIGINT}
+  </delete>
+
+  <!--根据 id 批量删除-->
+  <delete id="deleteTwByIdList" parameterType="java.util.List">
+    delete from t_product_type where tt_id in <foreach collection="list" item="item"  open="(" close=")" separator=","> #{item,jdbcType=VARCHAR}</foreach>
+  </delete>
+
+  <insert id="createTw" parameterType="com.halcyon.entity.TProductType">
+    insert into t_product_type (tt_id, tid, tname)
+    values (#{ttId,jdbcType=BIGINT}, #{tid,jdbcType=BIGINT}, #{tname,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateTwById" parameterType="com.halcyon.entity.TProductType">
+    update t_product_type
+    <set>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=BIGINT},
+      </if>
+      <if test="tname != null">
+        tname = #{tname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tt_id = #{ttId,jdbcType=BIGINT}
+  </update>
+
+
+
+
+
+
+
+
+
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_product_type
+    where tt_id = #{ttId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_product_type
+    where tt_id = #{ttId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.halcyon.entity.TProductType">
+    insert into t_product_type (tt_id, tid, tname
+      )
+    values (#{ttId,jdbcType=INTEGER}, #{tid,jdbcType=BIGINT}, #{tname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.halcyon.entity.TProductType">
+    insert into t_product_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ttId != null">
+        tt_id,
+      </if>
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="tname != null">
+        tname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ttId != null">
+        #{ttId,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=BIGINT},
+      </if>
+      <if test="tname != null">
+        #{tname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.halcyon.entity.TProductType">
+    update t_product_type
+    <set>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=BIGINT},
+      </if>
+      <if test="tname != null">
+        tname = #{tname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tt_id = #{ttId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.halcyon.entity.TProductType">
+    update t_product_type
+    set tid = #{tid,jdbcType=BIGINT},
+      tname = #{tname,jdbcType=VARCHAR}
+    where tt_id = #{ttId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.halcyon.mapper.TUserMapper">
+  <resultMap id="BaseResultMap" type="com.halcyon.entity.TUser">
+    <id column="tu_id" jdbcType="BIGINT" property="tuId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_nickname" jdbcType="VARCHAR" property="userNickname" />
+    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_tel" jdbcType="VARCHAR" property="userTel" />
+    <result column="user_flag" jdbcType="VARCHAR" property="userFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tu_id, user_id, user_nickname, user_pwd, user_email, user_tel
+  </sql>
+
+<!--  登录-->
+  <select id="selectByTelAndPwd"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    where user_id = #{userId,jdbcType=VARCHAR} AND user_pwd = #{userPwd,jdbcType=VARCHAR}
+  </select>
+
+  <!--注册-->
+  <insert id="register" parameterType="com.halcyon.entity.TUser" >
+    insert into t_user(user_id, user_nickname, user_pwd, user_email, user_tel)
+     values (#{userId,jdbcType=VARCHAR},#{userNickname,jdbcType=VARCHAR},
+     #{userPwd,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR})
+  </insert>
+
+  <!--分页查询用户-->
+  <select id="queryUserPage" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    order by tu_id desc
+    limit #{startRows,jdbcType=INTEGER},10
+  </select>
+
+  <!--分页查询用户-->
+  <select id="selectUserPage" resultType="com.halcyon.entity.TUser">
+    select * from t_user
+    <where>
+      <if test="userId != null and userId!=''">
+        and user_id like concat('%', #{uesrId}, '%')
+      </if>
+      <if test="userNickname != null and userId!=''">
+        and user_nickname like concat('%', #{userNickname}, '%')
+      </if>
+
+    </where>
+    order by user_id desc
+    limit #{startRows,jdbcType=INTEGER},10
+  </select>
+
+  <!--查询用户个数-->
+  <select id="getRowCount" resultType="java.lang.Integer">
+    select count(*) from t_user
+    <where>
+      <if test="userId != null and userId!=''">
+        and user_id like concat('%', #{uesr_id}, '%')
+      </if>
+      <if test="userNickname != null and userId!=''">
+        and user_nickname like concat('%', #{user_nickname}, '%')
+      </if>
+    </where>
+  </select>
+
+  <!--添加用户信息-->
+  <insert id="createUser" parameterType="com.halcyon.entity.TUser" >
+    insert into t_user(<include refid="Base_Column_List" />)
+    values (#{tuId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userNickname,jdbcType=VARCHAR},
+    #{userPwd,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR})
+  </insert>
+
+  <!--根据 user_id 删除用户-->
+  <delete id="deleteUserById" parameterType="String" >
+    delete from t_user
+    where tu_id = #{tuId,jdbcType=BIGINT}
+    </delete>
+
+  <!--根据 user_id 批量删除用户-->
+  <delete id="deleteUserByIdList" parameterType="java.util.List">
+    delete from t_user where tu_id in <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">#{item,jdbcType=VARCHAR}</foreach>
+  </delete>
+
+  <!--根据 user_id 更新用户信息-->
+  <update id="updateUserById" parameterType="com.halcyon.entity.TUser" >
+    update t_user
+    <set>
+
+    <if test="userId != null">
+      user_id = #{userId,jdbcType=BIGINT},
+    </if>
+    <if test="userNickname != null">
+      user_nickname = #{userNickname,jdbcType=VARCHAR},
+    </if>
+    <if test="userPwd != null">
+      user_pwd = #{userPwd,jdbcType=VARCHAR},
+    </if>
+    <if test="userEmail != null">
+      user_email = #{userEmail,jdbcType=VARCHAR},
+    </if>
+    <if test="userTel != null">
+      user_tel = #{userTel,jdbcType=VARCHAR},
+    </if>
+      <if test="userFlag != null">
+        user_flag = #{userFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where 1 = 1
+    and tu_id = #{tuId,jdbcType=BIGINT}
+  </update>
+
+<!--  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from t_user-->
+<!--    where tu_id = #{tuId,jdbcType=BIGINT}-->
+<!--  </select>-->
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">-->
+<!--    delete from t_user-->
+<!--    where tu_id = #{tuId,jdbcType=BIGINT}-->
+<!--  </delete>-->
+<!--  <insert id="insert" parameterType="com.halcyon.entity.TUser">-->
+<!--    insert into t_user (tu_id, user_id, user_nickname,-->
+<!--      user_pwd, user_email, user_tel-->
+<!--      )-->
+<!--    values (#{tuId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userNickname,jdbcType=VARCHAR},-->
+<!--      #{userPwd,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}-->
+<!--      )-->
+<!--  </insert>-->
+<!--  <insert id="insertSelective" parameterType="com.halcyon.entity.TUser">-->
+<!--    insert into t_user-->
+<!--    <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--      <if test="tuId != null">-->
+<!--        tu_id,-->
+<!--      </if>-->
+<!--      <if test="userId != null">-->
+<!--        user_id,-->
+<!--      </if>-->
+<!--      <if test="userNickname != null">-->
+<!--        user_nickname,-->
+<!--      </if>-->
+<!--      <if test="userPwd != null">-->
+<!--        user_pwd,-->
+<!--      </if>-->
+<!--      <if test="userEmail != null">-->
+<!--        user_email,-->
+<!--      </if>-->
+<!--      <if test="userTel != null">-->
+<!--        user_tel,-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--    <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--      <if test="tuId != null">-->
+<!--        #{tuId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="userId != null">-->
+<!--        #{userId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="userNickname != null">-->
+<!--        #{userNickname,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="userPwd != null">-->
+<!--        #{userPwd,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="userEmail != null">-->
+<!--        #{userEmail,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="userTel != null">-->
+<!--        #{userTel,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--  </insert>-->
+<!--  <update id="updateByPrimaryKeySelective" parameterType="com.halcyon.entity.TUser">-->
+<!--    update t_user-->
+<!--    <set>-->
+<!--      <if test="userId != null">-->
+<!--        user_id = #{userId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="userNickname != null">-->
+<!--        user_nickname = #{userNickname,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="userPwd != null">-->
+<!--        user_pwd = #{userPwd,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="userEmail != null">-->
+<!--        user_email = #{userEmail,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="userTel != null">-->
+<!--        user_tel = #{userTel,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    where tu_id = #{tuId,jdbcType=BIGINT}-->
+<!--  </update>-->
+<!--  <update id="updateByPrimaryKey" parameterType="com.halcyon.entity.TUser">-->
+<!--    update t_user-->
+<!--    set user_id = #{userId,jdbcType=BIGINT},-->
+<!--      user_nickname = #{userNickname,jdbcType=VARCHAR},-->
+<!--      user_pwd = #{userPwd,jdbcType=VARCHAR},-->
+<!--      user_email = #{userEmail,jdbcType=VARCHAR},-->
+<!--      user_tel = #{userTel,jdbcType=VARCHAR}-->
+<!--    where tu_id = #{tuId,jdbcType=BIGINT}-->
+<!--  </update>-->
+</mapper>

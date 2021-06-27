@@ -25,6 +25,14 @@ public class UserController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/adminLogin",method = RequestMethod.GET)
+    public ResultDTO adminLogin(String userId, String userPwd) {
+        System.out.println(userId);
+        return userService.login1(userId, userPwd);
+    }
+
+
+    @ResponseBody
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public Integer register(TUser user) {
         System.out.println(user);

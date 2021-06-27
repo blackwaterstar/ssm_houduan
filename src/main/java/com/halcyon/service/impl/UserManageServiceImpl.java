@@ -1,11 +1,14 @@
 package com.halcyon.service.impl;
 
 import com.halcyon.entity.TUser;
+import com.halcyon.entity.TUserWallet;
 import com.halcyon.mapper.TUserMapper;
+import com.halcyon.mapper.TUserWalletMapper;
 import com.halcyon.service.UserManageService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +18,8 @@ public class UserManageServiceImpl implements UserManageService {
 
     @Autowired
     private TUserMapper tUserMapper;
+    @Autowired
+    private TUserWalletMapper tUserWalletMapper;
 
     @Override
     public List<TUser> queryUserPage(Integer startRows) {
@@ -32,7 +37,12 @@ public class UserManageServiceImpl implements UserManageService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Integer createUser(TUser user) {
+        TUserWallet tUserWallet = new TUserWallet();
+        tUserWallet.setUserId(Long.valueOf(user.getUserId()));
+        tUserWallet.setUserAmount(Long.valueOf(0));
+        tUserWalletMapper.insert(tUserWallet);
         return tUserMapper.createUser(user);
     }
 

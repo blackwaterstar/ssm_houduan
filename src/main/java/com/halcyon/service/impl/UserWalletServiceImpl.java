@@ -53,4 +53,9 @@ public class UserWalletServiceImpl implements IUserWalletService {
         tUserWallet.setUserAmount(orderPrice);
         dao.updateByPrimaryKey1(tUserWallet);
     }
+
+    @Override
+    public int topupmoney(TUserWallet record) {
+        return dao.updateByPrimaryKey(record);
+    }
 }

@@ -19,6 +19,21 @@
     from t_product
   </select>
 
+  <select id="list1" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_product
+    <where>
+      <if test="pname != null and pname !=''">
+        and pname like concat('%', #{pname}, '%')
+      </if>
+      <if test="tid != null and tid!=''">
+        and tid like concat('%', #{tid}, '%')
+      </if>
+
+    </where>
+  </select>
+
   <select id="selectByPids" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -152,7 +167,7 @@
       <if test="price != null">
         price = #{price,jdbcType=VARCHAR},
       </if>
-      <if test="pshelf != null">
+      <if test="pimg != null">
         pimg = #{pimg,jdbcType=VARCHAR},
       </if>
     </set>

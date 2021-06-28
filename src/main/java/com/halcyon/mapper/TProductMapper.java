@@ -20,6 +20,7 @@ public interface TProductMapper {
     int updateByPrimaryKey(TProduct record);
 
     List<TProduct> list();
+    List<TProduct> list1(@Param("tid")String tid,@Param("pname")String pname);
 
     TProduct selectByPid(Long pid);
 

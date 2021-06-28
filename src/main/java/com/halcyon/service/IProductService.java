@@ -11,6 +11,8 @@ public interface IProductService {
     void addProduct(TProduct product);
 
     List<TProduct> getProducts();
+    List<TProduct> getProducts(String tid,String pname);
+
 
 
     TProduct getProductById(Long pid);

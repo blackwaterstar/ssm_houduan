@@ -5,6 +5,7 @@ import com.halcyon.service.IUserWalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,12 @@ public class UserWalletController {
     public void paymoney(Long userId,Long orderId,Long orderPrice){
           userWalletService.paymoney(userId,orderId,orderPrice);
 
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/topUp",method = RequestMethod.POST)
+    public void topUpmoney(TUserWallet record){
+        userWalletService.topupmoney(record);
     }
 
 }

@@ -42,7 +42,7 @@
   <select id="selectUserPage" resultType="com.halcyon.entity.TUser">
     select * from t_user
     <where>
-      <if test="userId != null and userId!=''">
+      <if test="userId != null and userId != ''">
         and user_id like concat('%', #{uesrId}, '%')
       </if>
       <if test="userNickname != null and userId!=''">

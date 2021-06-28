@@ -24,7 +24,7 @@ public class UserManage {
         public List<TUser> queryUserPage(Integer page) {
             int pageNow = page == null ? 1 : page;
             int pageSize = 10;
-            int startRows = pageSize*(pageNow-1);
+            int startRows = Math.abs(pageSize*(pageNow-1));
             return userManageService.queryUserPage(startRows);
         }
 
@@ -33,7 +33,7 @@ public class UserManage {
         public List<TUser> selectUserPage(String userId, String userNickname, Integer page) {
             int pageNow = page == null ? 1 : page;
             int pageSize = 10;
-            int startRows = pageSize*(pageNow-1);
+            int startRows = Math.abs(pageSize*(pageNow-1));
             return userManageService.selectUserPage(userId, userNickname, startRows);
         }
 

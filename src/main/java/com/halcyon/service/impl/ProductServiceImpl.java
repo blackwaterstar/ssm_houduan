@@ -22,6 +22,9 @@ public class ProductServiceImpl implements IProductService {
     public List<TProduct> getProducts() {
         return tProductMapper.list();
     }
+    public List<TProduct> getProducts(String tid,String pname) {
+        return tProductMapper.list1(tid,pname);
+    }
 
     public TProduct getProductById(Long pid) {
         return tProductMapper.selectByPid(pid);

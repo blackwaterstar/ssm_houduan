@@ -16,7 +16,11 @@ public interface IwarehouseService {
      * @return
      */
     List<TWarehouse> selectTwPage(String tid,String pid, Integer startRows);
-
+    /**
+     * 分页查询 带条件
+     * @return
+     */
+    List<TWarehouse> selectTwPage1(String tid,String pid);
     /**
      * 查询  个数
      */

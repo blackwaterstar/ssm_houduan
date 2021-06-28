@@ -32,6 +32,12 @@ public interface TWarehouseMapper {
     List<TWarehouse> selectTwPage(@Param("pname")String pname, @Param("tid")String tid, @Param("startRows")Integer startRows);
 
     /**
+     * 分页查询 带条件
+     * @return
+     */
+    List<TWarehouse> selectTwPage1(@Param("pname")String pname, @Param("tid")String tid);
+
+    /**
      * 查询  个数
      */
     Integer getRowCount(@Param("pname")String pname, @Param("tid")String tid);

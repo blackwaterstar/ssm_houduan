@@ -38,6 +38,8 @@ public interface TUserMapper {
      */
     List<TUser> selectUserPage(@Param("userId")String userId, @Param("userNickname")String userNickname, @Param("startRows")Integer startRows);
 
+    List<TUser> selectUserPage1(@Param("userId")String userId, @Param("userNickname")String userNickname);
+
     /**
      * 查询 User 个数
      * @param userId

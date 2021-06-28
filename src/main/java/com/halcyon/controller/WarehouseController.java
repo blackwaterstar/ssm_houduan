@@ -17,14 +17,14 @@ public class WarehouseController {
     @Autowired
     private IwarehouseService iwarehouseService;
 
-    @ResponseBody
-    @RequestMapping(value = "/queryUserPage",method = RequestMethod.POST)
-    public List<TWarehouse> queryUserPage(Integer page) {
-        int pageNow = page == null ? 1 : page;
-        int pageSize = 10;
-        int startRows = pageSize*(pageNow-1);
-        return iwarehouseService.queryTwPage(startRows);
-    }
+//    @ResponseBody
+//    @RequestMapping(value = "/queryUserPage",method = RequestMethod.POST)
+//    public List<TWarehouse> queryUserPage(Integer page) {
+//        int pageNow = page == null ? 1 : page;
+//        int pageSize = 10;
+//        int startRows = pageSize*(pageNow-1);
+//        return iwarehouseService.queryTwPage(startRows);
+//    }
     @ResponseBody
     @RequestMapping(value = "/queryUserPage1",method = RequestMethod.POST)
     public List<TWarehouse> queryUserPage1() {
@@ -38,6 +38,11 @@ public class WarehouseController {
         int pageSize = 10;
         int startRows = pageSize*(pageNow-1);
         return iwarehouseService.selectTwPage(pname, tid, startRows);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/selectTwPage1",method = RequestMethod.POST)
+    public List<TWarehouse> selectTwPage1(String pname, String tid) {
+        return iwarehouseService.selectTwPage1(pname, tid);
     }
 
     @ResponseBody

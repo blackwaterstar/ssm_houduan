@@ -27,7 +27,8 @@ public interface IProductService {
      * 分页查询 带条件
      * @return
      */
-    List<TProduct> selectTwPage(String tid,String pid, Integer startRows);
+    List<TProduct> selectTwPage(String pname,String tid, Integer startRows);
+    List<TProduct> selectTwPage1(String pname,String tid);
 
     /**
      * 查询  个数

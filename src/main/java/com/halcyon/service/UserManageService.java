@@ -15,22 +15,12 @@ public interface UserManageService {
      */
     List<TUser> queryUserPage(Integer startRows);
 
-    /**
-     * 分页查询 User 带条件
-     * @param userName
-     * @param userSex
-     * @param startRows
-     * @return
-     */
-    List<TUser> selectUserPage(@Param("userName")String userName, @Param("userSex")String userSex, @Param("startRows")Integer startRows);
+    List<TUser> selectUserPage(String userName, String userSex,Integer startRows);
 
-    /**
-     * 查询 User 个数
-     * @param userName
-     * @param userSex
-     * @return
-     */
-    Integer getRowCount(@Param("userName")String userName, @Param("userSex")String userSex);
+    List<TUser> selectUserPage1(String userId, String userNickname);
+
+
+    Integer getRowCount(String userId,String userNickname);
 
     /**
      * 添加 User

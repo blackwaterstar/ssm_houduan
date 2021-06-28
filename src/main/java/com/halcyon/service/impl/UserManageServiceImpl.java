@@ -30,10 +30,14 @@ public class UserManageServiceImpl implements UserManageService {
     public List<TUser> selectUserPage(String userName, String userSex, Integer startRows) {
         return tUserMapper.selectUserPage(userName, userSex, startRows);
     }
+    @Override
+    public List<TUser> selectUserPage1(String userId, String userNickname) {
+        return tUserMapper.selectUserPage1(userId, userNickname);
+    }
 
     @Override
-    public Integer getRowCount(String userName, String userSex) {
-        return tUserMapper.getRowCount(userName, userSex);
+    public Integer getRowCount(String userId, String userNickname) {
+        return tUserMapper.getRowCount(userId, userNickname);
     }
 
     @Override

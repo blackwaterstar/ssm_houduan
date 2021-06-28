@@ -41,6 +41,11 @@ public class TProductTypeController {
         int startRows = pageSize*(pageNow-1);
         return tProductTypeService.selectTwPage(tname, tid, startRows);
     }
+    @ResponseBody
+    @RequestMapping(value = "/selectTwPage1",method = RequestMethod.POST)
+    public List<TProductType> selectTwPage1(String tname, String tid) {
+        return tProductTypeService.selectTwPage1(tname, tid);
+    }
 
     @ResponseBody
     @RequestMapping(value = "/getRowCount",method = RequestMethod.POST)

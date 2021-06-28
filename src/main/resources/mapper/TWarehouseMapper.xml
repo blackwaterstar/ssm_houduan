@@ -52,6 +52,21 @@
     limit #{startRows,jdbcType=INTEGER},10
   </select>
 
+  <!--分页查询用户-->
+  <select id="selectTwPage1" resultType="com.halcyon.entity.TWarehouse">
+    select * from t_warehouse
+    <where>
+      <if test="pname != null and pname !=''">
+        and pname like concat('%', #{pname}, '%')
+      </if>
+      <if test="tid != null and tid!=''">
+        and tid like concat('%', #{tid}, '%')
+      </if>
+
+    </where>
+    order by tw_id asc
+  </select>
+
   <!--查询用户个数-->
   <select id="getRowCount" resultType="java.lang.Integer">
     select count(*) from t_warehouse

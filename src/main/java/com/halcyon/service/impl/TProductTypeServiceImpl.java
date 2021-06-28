@@ -30,10 +30,13 @@ public class TProductTypeServiceImpl implements TProductTypeService{
     public List<TProductType> selectTwPage(String tname, String tid, Integer startRows) {
         return tProductTypeMapper.selectTwPage(tname, tid,startRows);
     }
-
     @Override
-    public Integer getRowCount(String pname, String tid) {
-        return tProductTypeMapper.getRowCount(pname,tid);
+    public List<TProductType> selectTwPage1(String tname, String tid) {
+        return tProductTypeMapper.selectTwPage1(tname, tid);
+    }
+    @Override
+    public Integer getRowCount(String tname, String tid) {
+        return tProductTypeMapper.getRowCount(tname,tid);
     }
 
     @Override

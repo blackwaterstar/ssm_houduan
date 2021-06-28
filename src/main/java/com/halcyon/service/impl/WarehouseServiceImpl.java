@@ -23,6 +23,10 @@ public class WarehouseServiceImpl implements IwarehouseService {
     public List<TWarehouse> selectTwPage(String pname, String tid, Integer startRows) {
         return tWarehouseMapper.selectTwPage(pname, tid,startRows);
     }
+    @Override
+    public List<TWarehouse> selectTwPage1(String pname, String tid) {
+        return tWarehouseMapper.selectTwPage1(pname, tid);
+    }
 
     @Override
     public Integer getRowCount(String pname, String tid) {

@@ -18,11 +18,12 @@ public interface TProductTypeService {
      * @return
      */
     List<TProductType> selectTwPage(String tname,String tid, Integer startRows);
+    List<TProductType> selectTwPage1(String tname,String tid);
 
     /**
      * 查询  个数
      */
-    Integer getRowCount(String pname, String tid);
+    Integer getRowCount(String tname, String tid);
 
     /**
      * 添加

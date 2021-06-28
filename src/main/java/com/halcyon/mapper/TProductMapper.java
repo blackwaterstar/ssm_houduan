@@ -35,7 +35,7 @@ public interface TProductMapper {
      * @return
      */
     List<TProduct> selectTwPage(@Param("pname")String pname, @Param("tid")String tid, @Param("startRows")Integer startRows);
-
+    List<TProduct> selectTwPage1(@Param("pname")String pname, @Param("tid")String tid);
     /**
      * 查询  个数
      */

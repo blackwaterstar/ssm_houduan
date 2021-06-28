@@ -47,6 +47,11 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    public List<TProduct> selectTwPage1(String pname, String tid) {
+        return tProductMapper.selectTwPage1(pname, tid);
+    }
+
+    @Override
     public Integer getRowCount(String pname, String tid) {
         return tProductMapper.getRowCount(pname,tid);
     }

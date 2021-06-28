@@ -2,6 +2,7 @@ package com.halcyon.controller;
 
 import com.halcyon.entity.TUser;
 import com.halcyon.service.UserManageService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,14 +20,14 @@ public class UserManage {
         @Autowired
         private UserManageService userManageService;
 
-        @ResponseBody
-        @RequestMapping(value = "/queryUserPage",method = RequestMethod.POST)
-        public List<TUser> queryUserPage(Integer page) {
-            int pageNow = page == null ? 1 : page;
-            int pageSize = 10;
-            int startRows = Math.abs(pageSize*(pageNow-1));
-            return userManageService.queryUserPage(startRows);
-        }
+//        @ResponseBody
+//        @RequestMapping(value = "/queryUserPage",method = RequestMethod.POST)
+//        public List<TUser> queryUserPage(Integer page) {
+//            int pageNow = page == null ? 1 : page;
+//            int pageSize = 10;
+//            int startRows = Math.abs(pageSize*(pageNow-1));
+//            return userManageService.queryUserPage(startRows);
+//        }
 
         @ResponseBody
         @RequestMapping(value = "/selectUserPage",method = RequestMethod.POST)
@@ -36,6 +37,11 @@ public class UserManage {
             int startRows = Math.abs(pageSize*(pageNow-1));
             return userManageService.selectUserPage(userId, userNickname, startRows);
         }
+    @ResponseBody
+    @RequestMapping(value = "/selectUserPage1",method = RequestMethod.POST)
+    public List<TUser> selectUserPage1(String userId, String userNickname) {
+        return userManageService.selectUserPage1(userId, userNickname);
+    }
 
         @ResponseBody
         @RequestMapping(value = "/getRowCount",method = RequestMethod.POST)
@@ -46,9 +52,6 @@ public class UserManage {
         @ResponseBody
         @RequestMapping(value = "/createUser",method = RequestMethod.POST)
         public Integer createUser(TUser user) {
-//            Random random = new Random();
-//            Integer number = random.nextInt(9000) + 1000;
-//            user.setUserId(System.currentTimeMillis() + String.valueOf(number));
             return userManageService.createUser(user);
         }
 

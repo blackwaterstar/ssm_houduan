@@ -76,6 +76,21 @@
     order by tp_id asc
     limit #{startRows,jdbcType=INTEGER},10
   </select>
+  <!--分页查询用户-->
+
+  <select id="selectTwPage1" resultType="com.halcyon.entity.TProduct">
+    select * from t_product
+    <where>
+      <if test="pname != null and pname !=''">
+        and pname like concat('%', #{pname}, '%')
+      </if>
+      <if test="tid != null and tid!=''">
+        and tid like concat('%', #{tid}, '%')
+      </if>
+
+    </where>
+    order by tp_id asc
+  </select>
 
   <!--查询个数-->
   <select id="getRowCount" resultType="java.lang.Integer">

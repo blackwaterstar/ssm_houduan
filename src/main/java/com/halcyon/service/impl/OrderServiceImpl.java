@@ -251,4 +251,67 @@ public class OrderServiceImpl implements IOrderService {
         return cods;
     }
 
+    @Override
+    public List<CreateOrderDTO> getList2(Long orderId, Long userId) {
+         /*
+    订单的创建时间
+    订单编号
+    订单总金额
+
+    商品集合：
+        商品名称
+        商品价格
+        商品数量
+     */
+        List<TOrder> orders = tOrderMapper.selectByUserId2(orderId,userId);
+
+
+        List<CreateOrderDTO> cods = new ArrayList<CreateOrderDTO>();
+
+        orders.forEach( order -> {
+            CreateOrderDTO cod = new CreateOrderDTO();
+            cod.setCreatedTime(order.getCreatedTime());
+            cod.setOrderId(order.getOrderId());
+            BigDecimal bd = new BigDecimal(order.getOrderPrice().longValue());
+            cod.setOrderPrice(bd);
+            //将cod存入到cods集合中
+            cods.add(cod);
+        });
+
+        //遍历cods
+        //根据订单编号，去订单详情表中获取该订单的所欲商品的id及商品数量
+        //还要根据商品的id取商品表里获取商品名称和商品价格
+
+        cods.forEach( cod->{
+            //根据订单编号，去订单详情表中获取该订单的所有商品的id及商品数量
+            List<TOrderinfo> orderinfos =  orderInfoService.getOrderInfosByOrderId(cod.getOrderId());
+            //封装OrderProductDTO
+            List<OrderProductDTO> opds = new ArrayList<>();
+            orderinfos.forEach(orderinfo ->{
+                //通过商品id封装OrderProductDTO
+                OrderProductDTO opd = getOrderProductDTO(orderinfo.getProId());
+                //从orderinfo中获取商品数量存入到opd中
+                opd.setPcount(orderinfo.getPcount());
+                //opd封装完毕
+                //存入到集合中
+                opds.add(opd);
+            });
+
+            //将商品集合存入到CreateOrderDTO对象中
+            cod.setProducts(opds);
+//            getOrderProductDTO()
+
+        });
+        return cods;
+    }
+
+    @Override
+    public TOrder getorder(Long orderId){
+        return  tOrderMapper.selectByPrimaryKey1(orderId);
+    }
+
+    @Override
+    public Integer updatestatme(Long orderId) {
+        return tOrderMapper.updatestatme(orderId);
+    }
 }

@@ -31,6 +31,22 @@
     from t_order
     where user_id = #{userId,jdbcType=BIGINT} and paystatue='已付款'
   </select>
+  <select id="selectByUserId2" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_order
+
+    <trim prefix="WHERE (" suffix=")" prefixOverrides="AND |OR ">
+      <if test="orderId != null and orderId!=''">
+        and order_id like concat('%', #{orderId}, '%')
+      </if>
+      <if test="userId != null and userId!=''">
+        and user_id like concat('%', #{userId}, '%')
+      </if>
+      and paystatue='已付款'
+    </trim>
+
+  </select>
 
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -38,6 +54,12 @@
     <include refid="Base_Column_List" />
     from t_order
     where to_id = #{toId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByPrimaryKey1" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_order
+    where order_id = #{orderId}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_order
@@ -169,6 +191,11 @@
   <update id="updateByPrimaryKey1" parameterType="com.halcyon.entity.TOrder">
     update t_order
     set paystatue = #{paystatue,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+  <update id="updatestatme" parameterType="com.halcyon.entity.TOrder">
+    update t_order
+    set paystatue = '已发货'
     where order_id = #{orderId,jdbcType=BIGINT}
   </update>
 </mapper>
